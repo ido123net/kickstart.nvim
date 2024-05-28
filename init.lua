@@ -104,6 +104,16 @@ vim.opt.number = true
 --  Experiment for yourself to see if you like it!
 vim.opt.relativenumber = true
 
+local rel = vim.api.nvim_create_augroup('relativenumber', { clear = true })
+
+vim.api.nvim_create_autocmd('InsertEnter', { callback = function ()
+  vim.opt.relativenumber = false
+end, group = rel})
+
+vim.api.nvim_create_autocmd('InsertLeave', { callback = function ()
+  vim.opt.relativenumber = true
+end, group = rel})
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
